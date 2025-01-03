@@ -1,6 +1,6 @@
 {
   "name": "cnl-be",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "",
   "author": "GMZhang",
   "private": true,
@@ -29,7 +29,7 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
-    "express-session": "^1.18.0",
+    "cookie-parser": "^1.4.7",
     "openai": "^4.64.0",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",

@@ -56,12 +56,18 @@ USER root
 COPY --from=installer /app/cnl/${APP_NAME}/build /usr/share/nginx/html
 COPY --from=installer /app/cnl/${APP_NAME}/nginx.default.conf /etc/nginx/conf.d/default.conf
 
+COPY --from=installer /app/cnl/${APP_NAME}/entrypoint.sh .
+
+
 # Change owner to non-root user
 RUN chown -R 101:101 /app /usr/share/nginx/html
 
 # Switch to non-root user
 USER 101
+RUN chmod u+x ./entrypoint.sh
+# Set the entrypoint script as the executable to run when the container starts
+ENTRYPOINT ["/app/entrypoint.sh"]
 
+EXPOSE 3000
 # Start NGINX
-
 CMD ["nginx", "-g", "daemon off;"]

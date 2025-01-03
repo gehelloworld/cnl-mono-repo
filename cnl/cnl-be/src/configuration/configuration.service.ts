@@ -24,6 +24,11 @@ export class ConfigurationService {
   getHost(): string {
     return this.getClientConfig().host;
   }
+
+  getJwtSecret(): string {
+    return this.configService.getOrThrow<string>('JWT_SECRET');
+  }
+
   /*
   getAwsConfig(): AWSConfig {
     return this.configService.getOrThrow<AWSConfig>('aws');

@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 import { apiClient } from "../api/api";
+import profileImage from '../assets/images/profile-img.png'; 
 import { userProfileState } from "../recoil/Object.recoil";
-import {  useUserState } from "../utils/userHelpers";
+import { useUserState } from "../utils/userHelpers";
 import ChatInterface from "./ChatInterface";
-
 
 const ProfilePage: React.FC = () => {
   const { error, isLoading } = useUserState();
@@ -28,8 +28,8 @@ const ProfilePage: React.FC = () => {
       <div className="flex flex-col items-center">
         <div className="w-24 h-24 rounded-full overflow-hidden">
           <img
-            src={user?.profilePicture || 'https://via.placeholder.com/150'}
-            alt="Profile"
+            src={user?.profilePicture}
+            alt={profileImage}
             className="w-full h-full object-cover"
           />
         </div>

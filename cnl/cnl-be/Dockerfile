@@ -58,4 +58,5 @@ COPY --chown=cnl:cnlgroup --from=installer /app ./app
 ARG APP_NAME
 WORKDIR /home/cnl/app/cnl/${APP_NAME}
 
+EXPOSE 4000
 CMD ["node", "dist/main.js"]

@@ -22,7 +22,7 @@ export interface User {
       email: string;
       firstName: string;
       lastName: string;
-      picture: string;
+      profilePicture: string;
       accessToken: string;
     };
   }

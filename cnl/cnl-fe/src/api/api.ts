@@ -1,14 +1,15 @@
+import { environment } from "../environments/environments";
 import { ChatMessage, GoogleProfile, User } from "../types/types";
 
-// api.ts
-const BASE_URL = 'http://localhost:4000/api';
+// !! TODO
+const baseUrl = `${environment.app.backendUrl}/api`;
 
 // todo: refactor to smaller functions
 export const apiClient = {
   // test
   pingBackend: async (): Promise<{ message: string }> => {
-    const response = await fetch(`${BASE_URL}/ping`, {
-      credentials: 'include', // Include cookies for session handling
+    const response = await fetch(`${baseUrl}/ping`, {
+      credentials: 'include', 
     });
 
     if (!response.ok) {
@@ -19,7 +20,7 @@ export const apiClient = {
   },
 
   getDynamoDBTables: async (): Promise<string[]> => {
-    const response = await fetch(`${BASE_URL}/aws/dynamodb/tables`, {
+    const response = await fetch(`${baseUrl}/aws/dynamodb/tables`, {
       credentials: 'include', 
     });
 
@@ -31,7 +32,7 @@ export const apiClient = {
   },
 
   addTestData: async (testData: { randomId: string; message: string }): Promise<{ message: string }> => {
-    const response = await fetch(`${BASE_URL}/test/add`, {
+    const response = await fetch(`${baseUrl}/test/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -45,16 +46,16 @@ export const apiClient = {
 
     return response.json();
   },
-  //---------------------------------------------
 
+  
   /**
    * get user profile from auth service
    * 
-   * @returns usrProfile
+   * @returns userProfile
    */
   getProfile: async (): Promise<GoogleProfile> => {
-    const response = await fetch(`${BASE_URL}/auth/profile`, {
-      credentials: 'include', // Include cookies for session handling
+    const response = await fetch(`${baseUrl}/auth/profile`, {
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -70,7 +71,7 @@ export const apiClient = {
  * @returns 
  */
   sendMessageToGPT: async (message: string): Promise<{ response: string }> => {
-    const response = await fetch(`${BASE_URL}/openai/send-to-gpt`, {
+    const response = await fetch(`${baseUrl}/openai/send-to-gpt`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -91,12 +92,12 @@ export const apiClient = {
    * @returns 
    */
   getUserByEmail: async (email: string): Promise<User | null> => {
-    const response = await fetch(`${BASE_URL}/user/get-by-email?email=${email}`, {
+    const response = await fetch(`${baseUrl}/user/get-by-email?email=${email}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include', // Include cookies for session handling
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -115,13 +116,13 @@ export const apiClient = {
    * @param profile 
    */
   updateUserProfile: async (profile: User): Promise<void> => {
-    const response = await fetch(`${BASE_URL}/user/update-profile`, {
+    const response = await fetch(`${baseUrl}/user/update-profile`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(profile),
-      credentials: 'include', // Include cookies for session handling
+      credentials: 'include',
     });
 
     if (!response.ok) {
@@ -135,7 +136,7 @@ export const apiClient = {
  * @returns An array of ChatMessage objects
  */
 getMessagesByUserId: async (userId: string): Promise<ChatMessage[]> => {
-  const response = await fetch(`${BASE_URL}/messages/get-by-user?userId=${userId}`, {
+  const response = await fetch(`${baseUrl}/messages/get-by-user?userId=${userId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -154,7 +155,7 @@ getMessagesByUserId: async (userId: string): Promise<ChatMessage[]> => {
    * @param message - The chat message object to save
    */
   saveMessage: async (message: ChatMessage): Promise<void> => {
-    const response = await fetch(`${BASE_URL}/messages/save`, {
+    const response = await fetch(`${baseUrl}/messages/save`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

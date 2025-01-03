@@ -15,4 +15,9 @@ export class AppController {
   ping() {
     return { message: 'connected!!' };
   }
+
+  @Get('/')
+  getHealth() {
+    return { status: 'ok' };
+  }
 }

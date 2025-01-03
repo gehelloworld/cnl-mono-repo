@@ -24,3 +24,11 @@ export interface GoogleProfile {
     accessToken: string;
   };
 }
+
+export type MappedGoogleUser = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  picture: string;
+  accessToken?: string;
+};

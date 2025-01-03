@@ -4,14 +4,14 @@ import { useRecoilState } from "recoil";
 
 import { apiClient } from "../api/api";
 import { userProfileState } from "../recoil/Object.recoil";
-import { User } from "../types/types";
+import { GoogleProfile, User } from "../types/types";
 
 // util functions for user management
 // call getUserByEmail to get user data, 
 // if exists, set userProfileState, if not, add current time as firstLogin 
 export const useUserState = () => {
 
-    const { data, error, isLoading } = useQuery<{ profile: { email: string; firstName: string; lastName: string; picture: string; accessToken: string } }>({
+    const { data, error, isLoading } = useQuery<GoogleProfile>({
         queryKey: ['getProfile'],
         queryFn: apiClient.getProfile
       });
@@ -32,7 +32,7 @@ export const useUserState = () => {
                 userId: data.profile.email,
                 firstName: data.profile.firstName,
                 lastName: data.profile.lastName,
-                profilePicture: data.profile.picture,
+                profilePicture: data.profile.profilePicture,
                 accessToken: data.profile.accessToken,
                 firstLogin: thisUser.firstLogin, // Existing firstLogin from the backend
                 lastLogin: new Date().toISOString(),  // Update lastLogin to current time
@@ -44,7 +44,7 @@ export const useUserState = () => {
                 userId: data.profile.email,
                 firstName: data.profile.firstName,
                 lastName: data.profile.lastName,
-                profilePicture: data.profile.picture,
+                profilePicture: data.profile.profilePicture,
                 accessToken: data.profile.accessToken,
                 firstLogin: new Date().toISOString(), 
                 lastLogin: new Date().toISOString(),  

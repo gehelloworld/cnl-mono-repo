@@ -142,7 +142,7 @@ const ChatInterface: React.FC = () => {
       {/* Display messages */}
       <div
         ref={chatContainerRef}
-        className="flex-grow overflow-y-auto bg-gray-100 rounded-t-lg p-4 space-y-4"
+        className="flex-grow overflow-y-auto bg-gray-100 rounded-t-lg p-4 space-y-4 overflow-x-hidden"
       >
 
         {chatMessages.map((msg) => (
